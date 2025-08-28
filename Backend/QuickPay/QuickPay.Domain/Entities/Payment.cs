@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuickPay.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace QuickPay.Domain.Entities
         public string Currency { get; set; } = "USD";
         public string CardLast4 { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
+        public PaymentStatus Status { get; set; }
         public string? Reason { get; set; }
     }
 }
