@@ -1,4 +1,6 @@
 
+using QuickPay.Application.Services;
+
 namespace QuickPay.API
 {
     public class Program
@@ -8,6 +10,8 @@ namespace QuickPay.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            // Application services
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
