@@ -49,7 +49,7 @@ namespace QuickPay.Application.Services
                 reason = "Ödeme limiti aşıldı ( simülasyon )";
             }
             // 2️⃣ Random risk decline (%5)
-            else if (_rnd.NextDouble() < 0.05)
+            else if (_rnd.NextDouble() < 0.10)
             {
                 approved = false;
                 reason = "Bankadan reddedildi (simülasyon risk)";
@@ -74,7 +74,7 @@ namespace QuickPay.Application.Services
 
             await _repository.AddAsync(transaction);
 
-            return new PaymentResponseDto(approved, transaction.Id.ToString(), $"{maskedCardNumber} numaralı kartınızla yapılan işlem {transaction.Reason}");
+            return new PaymentResponseDto(approved, transaction.Id.ToString(), $"{maskedCardNumber} numaralı kartınızla yapılan işlem sonucu: {transaction.Reason}");
         }
     }
 

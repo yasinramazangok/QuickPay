@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuickPay.Application.DTOs
+﻿namespace QuickPay.Application.DTOs
 {
     public record PaymentRequestDto
-    (
-        string CardNumber,
-        string Expiry, // MM/YY or MM/YYYY
-        string Cvv,
-        decimal Amount,
-        string Currency = "USD"
-    );
+    {
+        public string CardNumber { get; init; }
+        public string Expiry { get; init; }
+        public string Cvv { get; init; }
+        public decimal Amount { get; init; }
+        public string Currency { get; init; }
+    }
 }
