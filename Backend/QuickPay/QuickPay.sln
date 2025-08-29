@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Domain", "QuickPay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Application", "QuickPay.Application\QuickPay.Application.csproj", "{33445A3C-4339-43EC-BA3E-A07659A48765}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Infrastructure", "QuickPay.Infrastructure\QuickPay.Infrastructure.csproj", "{8D63E9DB-4434-4F54-B013-69017E12CB36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{33445A3C-4339-43EC-BA3E-A07659A48765}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33445A3C-4339-43EC-BA3E-A07659A48765}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33445A3C-4339-43EC-BA3E-A07659A48765}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D63E9DB-4434-4F54-B013-69017E12CB36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D63E9DB-4434-4F54-B013-69017E12CB36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D63E9DB-4434-4F54-B013-69017E12CB36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D63E9DB-4434-4F54-B013-69017E12CB36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
