@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuickPay.Application\QuickPay.Application.csproj" />
+    <ProjectReference Include="..\QuickPay.Infrastructure\QuickPay.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
