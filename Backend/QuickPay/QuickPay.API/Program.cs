@@ -1,6 +1,8 @@
 
+using Microsoft.EntityFrameworkCore;
 using QuickPay.Application.Repositories;
 using QuickPay.Application.Services;
+using QuickPay.Infrastructure.Contexts;
 using QuickPay.Infrastructure.Repositories;
 
 namespace QuickPay.API
@@ -10,6 +12,10 @@ namespace QuickPay.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Add DbContext
+            builder.Services.AddDbContext<PaymentDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("QuicPayConnection")));
 
             // Add services to the container.
             // Application services DI
