@@ -33,7 +33,7 @@ namespace QuickPay.API
             //builder.Services.AddOpenApi();
 
             var app = builder.Build();
-
+            app.Urls.Add("http://0.0.0.0:8080");
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -46,7 +46,7 @@ namespace QuickPay.API
                 });
 
             }
-
+            
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
