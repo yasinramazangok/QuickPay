@@ -74,7 +74,7 @@ function PaymentForm() {
 
       const data = await response.json();
 
-      if (data.status) {
+      if (data.success) {
         setMessage(data.message); // Backend success message
       } else {
         setMessage(`Ödeme başarısız: ${data.message}`);
