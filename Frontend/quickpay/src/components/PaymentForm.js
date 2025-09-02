@@ -65,20 +65,23 @@ function PaymentForm() {
     };
 
     try {
-      const request = await fetch("http://localhost:5000/api/payments", {
+      
+      const response = await fetch("http://localhost:5000/api/payments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(paymentRequestDto),
       });
 
-      if (request.ok) {
-        setMessage("Payment successful!");
+      const data = await response.json();
+
+      if (data.status) {
+        setMessage(data.message); // Backend success message
       } else {
-        const error = await request.text();
-        setMessage(`Payment failed: ${error}`);
+        setMessage(`Ödeme başarısız: ${data.message}`);
       }
+
     } catch (err) {
-      setMessage(`Error: ${err.message}`);
+      setMessage(`Hata: ${err.message}`);
     }
 };
 
