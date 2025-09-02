@@ -9,6 +9,24 @@ function PaymentForm() {
   const [currency, setCurrency] = useState("USD");
   const [message, setMessage] = useState("");
 
+  // cardNumber mask
+   const formatCardNumber = (value) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(.{4})/g, "$1 ")
+      .trim();
+  };
+
+  // Expiry date mask
+  const formatExpiry = (value) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/^(\d{2})(\d{1,2})?$/, "$1/$2")
+      .slice(0, 5);
+  };
+
+  const formatCvv = (value) => value.replace(/\D/g, "").slice(0, 3);
+
   const validateInputs = () => {
     if (!/^\d{16}$/.test(cardNumber.replace(/\s+/g, ""))) {
       setMessage("Kart numarası 16 hane olmalı.");
@@ -75,7 +93,7 @@ function PaymentForm() {
           <input
             type="text"
             value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
+            onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
             placeholder="1234 5678 9012 3456"
             maxLength={19}
           />
@@ -86,7 +104,7 @@ function PaymentForm() {
           <input
             type="text"
             value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
+            onChange={(e) => setExpiryDate(formatExpiry(e.target.value))}
             placeholder="MM/YY"
             maxLength={5}
           />
@@ -97,7 +115,7 @@ function PaymentForm() {
           <input
             type="password"
             value={cvv}
-            onChange={(e) => setCvv(e.target.value)}
+            onChange={(e) => setCvv(formatCvv(e.target.value))}
             placeholder="123"
             maxLength={3}
           />
