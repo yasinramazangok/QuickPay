@@ -32,6 +32,18 @@ namespace QuickPay.API
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             //builder.Services.AddOpenApi();
 
+            // CORS policy 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:3000") // React app URL
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
+
             var app = builder.Build();
             app.Urls.Add("http://0.0.0.0:8080");
             // Configure the HTTP request pipeline.
@@ -50,6 +62,9 @@ namespace QuickPay.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            // CORS middleware
+            app.UseCors("AllowReactApp");
 
             app.MapControllers();
 
