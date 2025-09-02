@@ -9,28 +9,54 @@ function PaymentForm() {
   const [currency, setCurrency] = useState("USD");
   const [message, setMessage] = useState("");
 
+  const validateInputs = () => {
+    if (!/^\d{16}$/.test(cardNumber.replace(/\s+/g, ""))) {
+      setMessage("Kart numarası 16 hane olmalı.");
+      return false;
+    }
+
+    if (!/^\d{2}\/\d{2}$/.test(expiryDate)) {
+      setMessage("Son kullanım tarihi MM/YY veya MM/YYYY formatında olmalı.");
+      return false;
+    }
+
+    if (!/^\d{3}$/.test(cvv)) {
+      setMessage("CVV 3 hane olmalı.");
+      return false;
+    }
+
+    if (parseFloat(amount) <= 0 || isNaN(parseFloat(amount))) {
+      setMessage("Tutar pozitif bir sayı olmalı.");
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validateInputs()) return; // validation failed
+
     const paymentRequestDto = {
       cardNumber,
-      expiry,
+      expiry : expiryDate,
       cvv,
       amount: parseFloat(amount),
       currency,
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/payments", {
+      const request = await fetch("http://localhost:5000/api/payments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(paymentRequestDto),
       });
 
-      if (response.ok) {
+      if (request.ok) {
         setMessage("Payment successful!");
       } else {
-        const error = await response.text();
+        const error = await request.text();
         setMessage(`Payment failed: ${error}`);
       }
     } catch (err) {
@@ -41,7 +67,9 @@ function PaymentForm() {
   return (
     <div className="payment-container">
       <form className="payment-form" onSubmit={handleSubmit}>
+        
         <h2>QuickPay Ödeme</h2>
+
         <div className="form-group">
           <label>Kart Numarası</label>
           <input
@@ -52,6 +80,7 @@ function PaymentForm() {
             maxLength={19}
           />
         </div>
+
         <div className="form-group">
           <label>Son Kullanma Tarihi</label>
           <input
@@ -62,6 +91,7 @@ function PaymentForm() {
             maxLength={5}
           />
         </div>
+
         <div className="form-group">
           <label>CVV</label>
           <input
@@ -72,6 +102,7 @@ function PaymentForm() {
             maxLength={3}
           />
         </div>
+        
         <div className="form-group">
           <label>Tutar</label>
           <input
@@ -82,6 +113,7 @@ function PaymentForm() {
             step="0.01"
           />
         </div>
+
         <div className="form-group">
           <label>Para Birimi</label>
           <select
@@ -93,8 +125,11 @@ function PaymentForm() {
             <option value="TRY">TRY</option>
           </select>
         </div>
+
         <button type="submit">Ödeme Yap</button>
+        
         {message && <p className="message">{message}</p>}
+      
       </form>
     </div>
   );
