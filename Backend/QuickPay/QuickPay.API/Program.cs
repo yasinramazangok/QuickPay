@@ -35,10 +35,10 @@ namespace QuickPay.API
             // CORS policy 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowReactApp",
+                options.AddPolicy("AllowOrigins",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:3000") // React app URL
+                        policy.WithOrigins("http://localhost") 
                               .AllowAnyHeader()
                               .AllowAnyMethod();
                     });
@@ -64,7 +64,7 @@ namespace QuickPay.API
             app.UseAuthorization();
 
             // CORS middleware
-            app.UseCors("AllowReactApp");
+            app.UseCors("AllowOrigins");
 
             app.MapControllers();
 
