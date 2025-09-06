@@ -1,4 +1,5 @@
-﻿using QuickPay.Application.DTOs;
+﻿using QuickPay.Application.Common;
+using QuickPay.Application.DTOs;
 using QuickPay.Application.Repositories;
 using QuickPay.Application.Utils;
 using QuickPay.Domain.Entities;
@@ -9,11 +10,12 @@ namespace QuickPay.Application.Services
     public class PaymentService : IPaymentService
     {
         private readonly IPaymentRepository _repository;
-        private readonly Random _rnd = new Random();
+        private readonly IRandom _random;
 
-        public PaymentService(IPaymentRepository repository)
+        public PaymentService(IPaymentRepository repository, IRandom random)
         {
             _repository = repository;
+            _random = random;
         }
 
         public async Task<PaymentResponseDto> ProcessPaymentAsync(PaymentRequestDto request)
@@ -49,7 +51,7 @@ namespace QuickPay.Application.Services
                 reason = "Ödeme limiti aşıldı ( simülasyon )";
             }
             // 2️⃣ Random risk decline (%5)
-            else if (_rnd.NextDouble() < 0.10)
+            else if (_random.NextDouble() < 0.10)
             {
                 approved = false;
                 reason = "Bankadan reddedildi (simülasyon risk)";
