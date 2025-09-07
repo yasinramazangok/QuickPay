@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using QuickPay.Application.Common;
 using QuickPay.Application.Repositories;
 using QuickPay.Application.Services;
 using QuickPay.Infrastructure.Contexts;
+using QuickPay.Infrastructure.Randomization;
 using QuickPay.Infrastructure.Repositories;
 
 namespace QuickPay.API
@@ -22,6 +24,8 @@ namespace QuickPay.API
 
             // Repository DI
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+
+            builder.Services.AddScoped<IRandom, SystemRandom>();
 
             builder.Services.AddControllers();
 
